@@ -1,24 +1,22 @@
 <?php
 include 'conecta.php';
+
 //Verifica se o formulário enviou algo
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_usuario = $_POST['email_usuario'];
     $senha_usuario = $_POST['senha_usuario'];
 
-    // Query de verificação do usuário e senha
+    // Query de inserção
     $sql = " ";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam();
     $stmt->bindParam();
 
-    $stmt->execute();
-    $usuario = $stmt->fetch();
-
-    if ($usuario) {
-        $_SESSION['email_usuario'] = $usuario['email'];
-        header('Location: inicio.php'); // Redireciona para a página inicial após login
-    } else {
-        $erro = "Usuário ou senha incorretos.";
+    try {
+        $stmt->execute();
+        header('Location: index.php'); // Redireciona para a página inicial após o cadastro
+    } catch (PDOException $e) {
+        echo "<div class='alert alert-danger'>Erro: " . $e->getMessage() . "</div>";
     }
 }
 ?>
@@ -29,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -39,10 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="d-flex justify-content-center mb-4">
                 <img src="https://placehold.co/150x70?text=Meu%20App" alt="Logo" class="img-fluid mb-4">
             </div>
-            <h1 class="h3 mb-3 fw-normal text-center">Faça login</h1>
-            <?php if (isset($erro)): ?>
-                <div class="alert alert-danger"><?php echo $erro; ?></div>
-            <?php endif; ?>
+            <h1 class="h3 mb-3 fw-normal text-center">Cadastre-se</h1>
             <div class="form-floating mb-3">
                 <input type="text" name="email_usuario" class="form-control" placeholder="E-mail de usuário" required>
                 <label>E-mail de usuário</label>
@@ -51,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="senha_usuario" class="form-control" placeholder="Senha" required>
                 <label>Senha</label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-            <p class="mt-3 text-center"><a href="cadastro.php">Cadastrar-se</a></p>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Cadastrar</button>
+            <a class="w-100 btn btn-lg btn-secondary mt-3" href="/inicio.php">Voltar</a>
         </form>
     </div>
 </body>
