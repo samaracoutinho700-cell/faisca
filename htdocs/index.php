@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             WHERE email = :email 
             AND senha = :senha";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':email', $email_usuario);
     $stmt->bindParam(':senha', $senha_usuario);
