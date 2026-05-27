@@ -9,16 +9,9 @@ $senha = "";
 
 // Conexão com o banco de dados usando PDO
 try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$banco;charset=utf8mb4",
-        $usuario,
-        $senha
-    );
-
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    // Opcional: configuração que retorna os dados como array associativo por padrão
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $conn = new PDO('mysql:host=127.0.0.1;port=3306;dbname=sistema;charset=utf8', 'root', '');
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Erro de conexão com o banco de dados: " . $e->getMessage();
     exit;
