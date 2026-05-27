@@ -12,10 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_usuario = $_SESSION['email_usuario'];// Usa o email do usuário logado para excluir
 
     // Define a query para excluir o usuário do banco de dados
-    $sql = " ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam();
+    $sql = "DELETE FROM usuarios 
+            WHERE email = :email_usuario";
 
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindParam(':email_usuario', $email_usuario);
     try {
         $stmt->execute();
 
