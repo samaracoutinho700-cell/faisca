@@ -7,11 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha_usuario = $_POST['senha_usuario'];
 
     // Query de inserção
-    $sql = " ";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam();
-    $stmt->bindParam();
-
+      $stmt = $conn->prepare("INSERT INTO usuarios (email, senha) VALUES (?, ?)");
+        $stmt->bind_param("ss", $email_usuario, $senha_usuario);
+    
     try {
         $stmt->execute();
         header('Location: index.php'); // Redireciona para a página inicial após o cadastro
