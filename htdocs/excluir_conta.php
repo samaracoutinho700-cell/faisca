@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "DELETE FROM usuarios 
             WHERE email = :email_usuario";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':email_usuario', $email_usuario);
     try {

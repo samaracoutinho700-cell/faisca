@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             SET senha = :nova_senha 
             WHERE email = :email_usuario";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt = $conn->prepare($sql);
 
     $stmt->bindParam(':nova_senha', $nova_senha);
     $stmt->bindParam(':email_usuario', $email_usuario);
