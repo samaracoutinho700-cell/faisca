@@ -7,8 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha_usuario = $_POST['senha_usuario'];
 
     // Query de inserção
-      $stmt = $conn->prepare("INSERT INTO usuarios (email, senha) VALUES (?, ?)");
-       $stmt = $conn->prepare($sql);
+       $sql = "INSERT INTO usuarios (email, senha) VALUES (:email, :senha)";
+
+$stmt = $conn->prepare($sql);
 
 $stmt->bindParam(':email', $email_usuario);
 $stmt->bindParam(':senha', $senha_usuario);
