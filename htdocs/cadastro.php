@@ -14,7 +14,6 @@ $stmt = $conn->prepare($sql);
 $stmt->bindParam(':email', $email_usuario);
 $stmt->bindParam(':senha', $senha_usuario);
 
-$stmt->execute();
     try {
         $stmt->execute();
         header('Location: index.php'); // Redireciona para a página inicial após o cadastro
