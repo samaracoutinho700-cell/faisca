@@ -7,7 +7,7 @@ $banco = "sistema";
 $usuario = "root";
 $senha = "";
 
-// Conexão com o banco de dados usando PDO
+// Conexão com o banco de dados usand
 try {
 
     $conn = new PDO(
